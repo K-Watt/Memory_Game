@@ -120,7 +120,137 @@ function hideStar(){
 //Timer functions that start, stop, and display the time
 */
 //clock fucntion that starts the time
-function startClock()
+function startClock(){
+  clockId = setInterval(() => {
+    time++;
+    displayTime();
+  }, 1000);
+}
+//check to see if the clock is running, if not start it after the first click
+function clockRun(){
+  if(clockOff === true){
+    clockOff = false;
+    startClock();
+  }
+}
+//stop the Timer
+function clockStop(){
+  clearInterval(clockId);
+}
+//display the time in html
+function displayTime(){
+  const clock = document.querySelector('.clock');
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+
+  if(seconds < 10){
+    clock.innerHTML = `${minutes}:0${seconds}`;
+  } else {
+    clock.innerHTML = `${minutes}:${seconds}`;
+  }
+}
+
+//check to see if the game is over(if matched cards =8), if so, toggle modal and stop the clock
+function gameOver(){
+  if(matchedCards.length === 8){
+    clockStop();
+    toggleModal();
+  }
+}
+
+/*
+//modal functions
+*/
+
+
+function toggleModal(){
+  const modal = document.querySelector('.modal_background');
+  modal.classList.toggle('hide');
+  modalStats();
+}
+
+//grabs the stats from the game and add them to the modal(moves, stars, time)
+function modalStats(){
+  const timeStat = document.querySelector('.modal_time');
+  const clockTime = document.querySelector('.clock').innerHTML;
+  const movesStat = document.querySelector('.modal_moves');
+  const starsStat = document.querySelector('.modal_stars');
+  const stars = getStars();
+  timeStat.innerHTML = `Time = ${clockTime}`;
+  movesStat.innerHTML = `Moves = ${moves}`;
+  starsStat.innerHTML =  `Stars = ${stars}`;
+
+
+
+//this bad boy looks to see how many stars don't have the class of 'none' and returns them
+function getStars(){
+  stars = document.querySelectorAll('.stars li');
+  starCounter = 0l
+  for(star of stars){
+    if(star.style.display !== 'none'){
+      starCounter++;
+    }
+  }
+  return starCounter;
+}
+
+//cancel button that only toggles the modal, possibly a future share button
+document.querySelector('.modal_cancel').addEventListener('click', function(){
+  toggleModal();
+});
+document.querySelector('.modal_close').addEventListener('click', function(){
+  toggleModal();
+});
+//replay button basically resets the game (clears cards, timer, and reshuffles)
+document.querySelector('.modal_replay').addEventListener('click', function(){
+  restartGame();
+  toggleModal();
+  cardContainer.innerHTML = [];
+  init();
+  matchedCards = [];
+});
+
+//restart button
+restartButtn.addEventListener('click', function(){
+  //delete all the cards
+  cardContainer.innerHTML = [];
+  //initialize the game again and shuffle the cards
+  init();
+  shuffle(icons);
+  //clear matched cards array and reset all other ...attributes? i can't think of the word...it runs the restartGame function
+  matchedCards = [];
+  restartGame();
+});
+
+
+/*
+// Reset game functions
+*/
+//restart game function call all functions that 'reset' the scores
+function restartGame(){
+  clearClock();
+  clearMoves();
+  clearStars();
+  shuffle(icons);
+}
+funciton clearClock(){
+  clockStop();
+  time = 0;
+  clockOff = true;
+  displayTime();
+}
+
+function clearMoves(){
+  moves = 0;
+  const starList = document.querySelector('.moves').innerHTML = moves;
+}
+function clearStars(){
+  stars = 0;
+  const startList = document.querySelectorAll('.stars li');
+  for(star of starList){
+    star.style.display = 'inline';
+  }
+}
 init();
 
 
