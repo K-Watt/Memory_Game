@@ -25,7 +25,7 @@ const cardContainer = document.querySelector('.deck');
 const restartButtn = document.querySelector('.restart');
 
 //shuffle icons
-//shuffle(icons);
+shuffle(icons);
 
 //initialize the game
 
@@ -213,6 +213,8 @@ document.querySelector('.modal_replay').addEventListener('click', function(){
   init();
   matchedCards = [];
 });
+toggleModal();
+
 
 //restart button
 restartButtn.addEventListener('click', function(){
@@ -250,7 +252,7 @@ function clearMoves(){
 }
 function clearStars(){
   stars = 0;
-  const startList = document.querySelectorAll('.stars li');
+  const starList = document.querySelectorAll('.stars li');
   for(star of starList){
     star.style.display = 'inline';
   }
