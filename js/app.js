@@ -213,7 +213,6 @@ document.querySelector('.modal_replay').addEventListener('click', function(){
   init();
   matchedCards = [];
 });
-toggleModal();
 
 
 //restart button
