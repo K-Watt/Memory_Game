@@ -6,9 +6,9 @@
 const icons = ['fa fa-diamond','fa fa-diamond',"fa fa-paper-plane-o","fa fa-paper-plane-o","fa fa-anchor","fa fa-anchor","fa fa-bolt","fa fa-bolt","fa fa-cube","fa fa-cube","fa fa-leaf","fa fa-leaf","fa fa-bicycle","fa fa-bicycle","fa fa-bomb","fa fa-bomb"];
 
 //array containing the open cards
-const openCards = [];
+let openCards = [];
 //array containing the matched cards
-const matchedCards = [];
+let matchedCards = [];
 
 /*
 // Globals
@@ -179,13 +179,13 @@ function modalStats(){
   timeStat.innerHTML = `Time = ${clockTime}`;
   movesStat.innerHTML = `Moves = ${moves}`;
   starsStat.innerHTML =  `Stars = ${stars}`;
-
+}
 
 
 //this bad boy looks to see how many stars don't have the class of 'none' and returns them
 function getStars(){
   stars = document.querySelectorAll('.stars li');
-  starCounter = 0l
+  starCounter = 0;
   for(star of stars){
     if(star.style.display !== 'none'){
       starCounter++;
@@ -233,7 +233,7 @@ function restartGame(){
   clearStars();
   shuffle(icons);
 }
-funciton clearClock(){
+function clearClock(){
   clockStop();
   time = 0;
   clockOff = true;
