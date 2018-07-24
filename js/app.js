@@ -1,8 +1,60 @@
+//before reading this code, be sure to read the read me.
+
 /*
  * Create a list that holds all of your cards
  */
+const icons = ['fa fa-diamond','fa fa-diamond',"fa fa-paper-plane-o","fa fa-paper-plane-o","fa fa-anchor","fa fa-anchor","fa fa-bolt","fa fa-bolt","fa fa-cube","fa fa-cube","fa fa-leaf","fa fa-leaf","fa fa-bicycle","fa fa-bicycle","fa fa-bomb","fa fa-bomb"];
 
-const icons = []
+//array containing the open cards
+const openCards = [];
+//array containing the matched cards
+const matchedCards = [];
+
+/*
+// Globals
+*/
+let moves = 0;
+let clockOff = true;
+let time = 0;
+let clockId;
+let cleanSlate = false;
+
+//card container
+const cardContainer = document.querySelector('.deck');
+//restart button
+const restartButtn = document.querySelector('.restart');
+
+//shuffle icons
+//shuffle(icons);
+
+//initialize the game
+
+function init(){
+  //build the deck
+  for(let i = 0; i <icons.length; i++){
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.innerHTML =`<i class =${icons[i]}></i>`;
+    cardContainer.appendChild(card);
+    cardClick(card);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
