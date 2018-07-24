@@ -31,61 +31,65 @@ const restartButtn = document.querySelector('.restart');
 
 function init(){
   //build the deck
-  for(let i = 0; i <icons.length; i++){
+  for (let i = 0; i < icons.length; i++){
     const card = document.createElement("li");
     card.classList.add("card");
-    card.innerHTML =`<i class =${icons[i]}></i>`;
+    card.innerHTML = `<i class="${icons[i]}"></i>`;
     cardContainer.appendChild(card);
+    //add click event
     cardClick(card);
   }
 }
 
-/*
-// Card click and comparing functions
-*/
 
-function cardClick(card){
-  card.addEventListener('click', function(){
-    if (openCards.length === 1){
-      const currentCard = this;
-      const previousCard = openCards[0];
-      card.classList.add('open','show','disabled');
-      openCards.push(this);
 
-      /*
-      ** All functions below do the following:
-      * compare the 2 cards
-      * add a move to the card counter (also updates HTML)
-      * check the score to see if a card should be removed
-      * check to see if the game is over, if so stop clock and toggle modal
-      */
-      compare(currentCard,previousCard);
-      addMove();
-      checkScore();
-      gameOver();
-    } else if(openCards.length < 1){
-      openCards.push(this);
-      card.classList.add('open','show','disabled');
-    } clockRun();
-  });
-}
 
 /*
-// compare the 2 clicked cards inner html to see if they match, if they do add 'match' class, if not 'close' the cards
-*/
-function compare(currentCard,previousCard){
-  if(currentCard.innerHTML === openCards[0].innerHTML){
-    currentCard.classList.add('match');
-    previousCard.classList.add('match');
-    matchedCards.push(openCards);
-    openCards = [];
-  } else { setTimeout(function() {
-    currentCard.classList.remove('open','show','disabled');
-    previousCard.classList.remove('open','show','disabled');
-    openCards = [];
-  }, 1000);
-  }
-}
+ * click event
+ */
+
+ function cardClick(card){
+   card.addEventListener('click', function(){
+     if (openCards.length === 1){
+       const currentCard = this;
+       const previousCard = openCards[0];
+       card.classList.add('open','show','disabled');
+       openCards.push(this);
+
+       /*
+       ** All functions below do the following:
+       * compare the 2 cards
+       * add a move to the card counter (also updates HTML)
+       * check the score to see if a card should be removed
+       * check to see if the game is over, if so stop clock and toggle modal
+       */
+       compare(currentCard,previousCard);
+       addMove();
+       checkScore();
+       gameOver();
+     } else if(openCards.length < 1){
+       openCards.push(this);
+       card.classList.add('open','show','disabled');
+     } clockRun();
+   });
+ }
+ /*
+ // compare the 2 clicked cards inner html to see if they match, if they do add 'match' class, if not 'close' the cards
+ */
+ function compare(currentCard,previousCard){
+   if(currentCard.innerHTML === openCards[0].innerHTML){
+     currentCard.classList.add('match');
+     previousCard.classList.add('match');
+     matchedCards.push(openCards);
+     openCards = [];
+   } else { setTimeout(function() {
+     currentCard.classList.remove('open','show','disabled');
+     previousCard.classList.remove('open','show','disabled');
+     openCards = [];
+   }, 1000);
+   }
+ }
+
 //add a move for ever two cards flipped
 function addMove(){
   moves++;
