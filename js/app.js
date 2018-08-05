@@ -1,6 +1,6 @@
 //before reading this code, be sure to read the read me.
 //test push
-let test = [];
+
 /*
  * Create a list that holds all of your cards
  */
